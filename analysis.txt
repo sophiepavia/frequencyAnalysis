@@ -1,0 +1,32 @@
+Sophie Pavia
+HW 6
+12/2/20
+
+Complexity Analysis
+
+1). Reading the input set:
+	In my proj6.cpp I read in the text file character by character using a while loop and cin.get() till the end of the file. I do this in my function: readIn(unordered_map<char, int> &characters, 
+					unordered_map<string, int> &words, 
+					unordered_map<string, int> &numbers, 
+					vector<string> &insertOrder,vector<string> &insertOrder2);
+		Since we are reading in character by character the worst case of reading the input set would be O(n), where n is the number of characters in the file. 
+2). Storing the characters / words / numbers in your chosen containers, and setting their tracking values
+	To store the characters/word/numbers in my unordered_map I use [] operator, where the key is the thing i am storing and the value is its frequency. The worse case of storing the characters / words / numbers is O(n) where n is the container size, however if a rehash is required (starting size for all containers is 100) then the worst case complexity could be O(n^2), however the average complexity of a rehash is O(n), where again n is the size of the container. 
+		The tracking values are set by incrementing the int value stored under the key with the ++ operator which is incremented each time a characters/word/numbers appears of the specified key it is done at the same time as the insert so all together the complexity is O(n) for the insert and the setting of the tracking values. 
+3). Looking up the final tracking info on your character / word / number frequencies
+	Our final tracking info for input is copied from a unordered_map to a vector. 
+	For words and numbers the order of inserts of the keys is also perserved with a vector. (I push back each number/ word into a vector once to allow stable_sort to be successful later, the complexity of the insert into the vector for insertOrder and insertOrder2 is O(n), where n is the number of elements inserted into the vectors).
+	The copying of the input from the map to the vector is O(n) (these are both down with for loops). n is the number of elements, insert takes place during the copying in the loop so the overall complexity of the loop + the insert would be O(n) * O(n) = O(n^2)
+	To specifically look up how many times the input appears you use 
+		vector[i]->second, which is constant so the worst case is O(1). 
+4). Deciding on (and accessing for output) your "Top Ten" most frequent list for each case
+	There are a couple of steps that are down with deciding on and accessing the out for the "Top Ten." Before I access the data, I sort it from highest occurance to least occurance, and adhere to the specficed output for when they are equal
+	To sort my numbers and words I take the vector they were copied into and call stable sort on it (to perserve the order they were inserted into the map in). The worst case of stable_sort in the algorithm libray is N(log(N)) where n is the number of elements in the vector. 
+	To sort my characters I take the vector they were put into (in order to be able to sort them) and call sort on the vector (order does not need to be perserved) this has a worse case of N(log(N)) as well were N is the number of elements in the vector. 
+	Now that my data is sorted based on my sortTop functions (one for numbers and words another for characters). I can now access the data in my print function (which is the same for all input)
+	My print function accesses the data through a vector and the vector is iterated through with a loop and the [] operator. Since all of the statements within the loop are O(1), the worse case for my print function (accessing) is O(n) where n is the number of statements it prints out (aka either 10 number of elements in vector >= 10, or n<10 if the number of elements in the vector is less than 10.)
+All of my extra tasks done in my program should be detailed within each of my 4 points. I validated my run times by utitlizing the run time on coderunner (what I complie on) as well as using the ctime library on the terminal within linprog! 
+
+	
+		
+
